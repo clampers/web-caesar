@@ -44,16 +44,13 @@ def verify_int_rot(rot):
 
 @app.route("/", methods=['POST'])
 def encrypt():
-    if verify_int_rot(request.form['rot']) == False:
-        error_message = 'Not an integer'
-        return redirect('/?error=' + error_message)
-    else:
-        rot_by = request.form['rot']
-        message = request.form['text']
-        # message = request.args.get['text']
-        encrypted_message = rotate_string(message, rot_by)
 
-        return """<h1>""" + encrypted_message + """</h1>"""
+    rot_by = int(request.form['rot'])
+    message = str(request.form['text'])
+
+    encrypted_message = rotate_string(message, rot_by)
+
+    return encrypted_message
 
 
 @app.route("/")
